@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.scss';
-import MyComponent from './example/MyComponent';
+// import MyComponent from './example/MyComponent';
+import ListTodo from './Todos/ListTodo';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -8,10 +11,23 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello world with react.js (Xuan Diep)
+          Simple Todo app with react.js (Xuan Diep)
         </p>
-        <MyComponent />
+        {/* <MyComponent /> */}
+        <ListTodo></ListTodo>
       </header>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

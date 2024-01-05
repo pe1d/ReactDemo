@@ -1,42 +1,49 @@
 import React from "react";
 import ChildComponent from "./ChildComponent";
+import AddComponent from "./AddComponent";
 class MyComponent extends React.Component {
 
     state = {
-        fName: '',
-        lName: ''
+        arrJobs: [
+            { id: 'abc Job1', title: 'Developer', salary: '500' },
+            { id: 'abc Job2', title: 'Tester', salary: '400' },
+            { id: 'abc Job3', title: 'Project Manager', salary: '500' }
+        ]
     }
-    handleChangeFName = (event) => {
+    addNewJob = (job) => {
+        console.log('check job from child: ', job)
+        // let currentJobs = this.state.arrJobs;
+        // currentJobs.push(job);
         this.setState({
-            fName: event.target.value
+            arrJobs: [...this.state.arrJobs, job]
+            // arrJobs: currentJobs
         })
     }
-    handleChangeLName = (event) => {
+    delJob = (job) => {
+        let currentJobs = this.state.arrJobs;
+        currentJobs = currentJobs.filter(item => item.id !== job.id)
         this.setState({
-            lName: event.target.value
+            arrJobs: currentJobs
         })
     }
-    handleSubmit = (event) => {
-        event.preventDefault()
-        console.log(">>>Check data input", this.state)
+    componentDidUpdate(prevProps, prevState) {
+        console.log('>>Run did Update: ', 'prev State: ', prevState, 'current State: ', this.state)
+    }
+    componentDidMount() {
+        console.log(">>>>Run component did mount")
     }
     render() {
         console.log(' >>>>>>> Call render', this.state)
         return (
             <>
-                <form>
-                    <label htmlFor='fname'>First name</label><br />
-                    <input type="text" value={this.state.fName}
-                        onChange={(event) => this.handleChangeFName(event)} /><br />
-                    <label htmlFor='Lname'>Last name</label><br />
-                    <input type="text" value={this.state.lName}
-                        onChange={(event) => this.handleChangeLName(event)} /><br />
-                    <input type="submit"
-                        onClick={(event) => this.handleSubmit(event)} />
-                </form>
-                <ChildComponent name={'child one'} />
-                <ChildComponent name={'child two'} />
-                <ChildComponent name={'child three'} />
+                <AddComponent
+                    addNewJob={this.addNewJob}
+                />
+                <ChildComponent
+                    arrJobs={this.state.arrJobs}
+                    delJob={this.delJob}
+
+                />
             </>
         )
     }
