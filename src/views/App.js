@@ -12,6 +12,10 @@ import {
   Route,
   Link
 } from "react-router-dom"
+import ListUsers from './Users/ListUsers.js';
+import DetailUser from './Users/DetailUser.js';
+
+
 function App() {
   return (
     <BrowserRouter>
@@ -29,9 +33,13 @@ function App() {
             <Route path='/about'>
               <MyComponent />
             </Route>
+            <Route path='/users' exact>
+              <ListUsers />
+            </Route>
+            <Route path='/users/:id'>
+              <DetailUser />
+            </Route>
           </Switch>
-          {/* <MyComponent /> */}
-          {/* <ListTodo></ListTodo> */}
         </header>
         <ToastContainer
           position="top-right"
